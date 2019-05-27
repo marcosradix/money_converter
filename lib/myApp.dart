@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.amber,
         centerTitle: true,
       ),
-      body: FutureBuilderWidget(currencyService: currencyService),
+      body: Home( currencyService: currencyService ),
     );
   }
 }
