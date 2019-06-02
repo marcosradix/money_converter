@@ -8,18 +8,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-    CurrencyService currencyService = new CurrencyService();
+  CurrencyService currencyService = new CurrencyService();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text(" \$ Conversor de moeda \$"),
-        backgroundColor: Colors.amber,
-        centerTitle: true,
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.green,
+        appBar: AppBar(
+          title: Text(" \$ Conversor de moeda \$"),
+          backgroundColor: Colors.amber,
+          centerTitle: true,
+        ),
+        body: Home(currencyService: currencyService),
       ),
-      body: Home( currencyService: currencyService ),
+      theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.amber),
     );
   }
 }

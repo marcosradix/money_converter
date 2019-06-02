@@ -13,25 +13,29 @@ final Function(String dateTime) onChangeValue;
 
   @override
   Widget build(BuildContext context) {
-    return  TextField(
-
-      keyboardType: TextInputType.numberWithOptions(),
-      decoration: InputDecoration(
-          labelText: texto,
-          labelStyle:
-          TextStyle(fontSize: 26.0, color: Colors.amber),
-          border: OutlineInputBorder(),
-          suffixIcon: CircleIconButton(
-            onPressed: (){
-              this.textController.clear();
-            },
+    return  Container(
+        child: TextField(
+          keyboardType: TextInputType.numberWithOptions(),
+          decoration: InputDecoration(
+              labelText: texto,
+              labelStyle:
+              TextStyle(fontSize: 26.0, color: Colors.amber),
+              border: OutlineInputBorder(
+                borderSide:  BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(25.7),
+              ),
+              suffixIcon: CircleIconButton(
+                onPressed: (){
+                  this.textController.clear();
+                },
+              ),
+              prefixStyle: TextStyle(color: Colors.amber),
+              prefixText: simbolo
           ),
-          prefixStyle: TextStyle(color: Colors.amber),
-          prefixText: simbolo
-      ),
-      style: TextStyle(color: Colors.amber, fontSize: 25.0),
-      controller: this.textController,
-      onChanged: (value) { onChangeValue(value); },
+          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+          controller: this.textController,
+          onChanged: (value) { onChangeValue(value); },
+        ),
     );
   }
 }
