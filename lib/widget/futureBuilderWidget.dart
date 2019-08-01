@@ -12,7 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final realController = TextEditingController();
   final dolarController = TextEditingController();
   final euroController = TextEditingController();
@@ -20,24 +19,25 @@ class _HomeState extends State<Home> {
   double dolar;
   double euro;
 
-void _realChange(String text){
-  double real = double.parse(text);
-  dolarController.text = (real / this.dolar).toStringAsFixed(2);
-  euroController.text = (real / this.euro).toStringAsFixed(2);
-print(text);
-}
+  void _realChange(String text) {
+    double real = double.parse(text);
+    dolarController.text = (real / this.dolar).toStringAsFixed(2);
+    euroController.text = (real / this.euro).toStringAsFixed(2);
+    print(text);
+  }
 
-  void _dlarChange(String text){
+  void _dlarChange(String text) {
     double dolar = double.parse(text);
     realController.text = (dolar * this.dolar).toStringAsFixed(2);
     euroController.text = ((dolar * this.dolar) / this.euro).toStringAsFixed(2);
   }
 
-  void _euroChange(String text){
-   double euro = double.parse(text);
-   realController.text = (euro * this.euro).toStringAsFixed(2);
-   dolarController.text = (euro * this.euro / this.dolar).toStringAsFixed(2);
+  void _euroChange(String text) {
+    double euro = double.parse(text);
+    realController.text = (euro * this.euro).toStringAsFixed(2);
+    dolarController.text = (euro * this.euro / this.dolar).toStringAsFixed(2);
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map>(
@@ -58,20 +58,38 @@ print(text);
             this.dolar = snapshot.data["results"]["currencies"]["USD"]["buy"];
             this.euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
             return SingleChildScrollView(
-              padding: EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Icon(
-                      Icons.monetization_on,
-                      size: 150.0,
-                      color: Colors.amber,
+                    GestureDetector(
+                      onTap: () {
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                      },
+                      child: Icon(
+                        Icons.monetization_on,
+                        size: 150.0,
+                        color: Colors.amber,
+                      ),
                     ),
-                    BuildTextField(texto: "REAL", simbolo:"R\$", textController: this.realController, onChangeValue: (_realChange),),
+                    BuildTextField(
+                      texto: "REAL",
+                      simbolo: "R\$",
+                      textController: this.realController,
+                      onChangeValue: (_realChange),
+                    ),
                     Divider(),
-                    BuildTextField(texto: "DÓLAR", simbolo:"US\$", textController: this.dolarController, onChangeValue: (_dlarChange)),
+                    BuildTextField(
+                        texto: "DÓLAR",
+                        simbolo: "US\$",
+                        textController: this.dolarController,
+                        onChangeValue: (_dlarChange)),
                     Divider(),
-                    BuildTextField(texto: "EURO", simbolo:"€", textController: this.euroController, onChangeValue: (_euroChange)),
+                    BuildTextField(
+                        texto: "EURO",
+                        simbolo: "€",
+                        textController: this.euroController,
+                        onChangeValue: (_euroChange)),
                   ],
                 ));
           default:
