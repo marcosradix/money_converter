@@ -1,12 +1,11 @@
 
 import 'package:flutter/material.dart';
 
-import 'circleIconButton.dart';
 
 class BuildTextField extends StatelessWidget {
 final String texto;
 final String simbolo;
-TextEditingController textController = TextEditingController();
+final TextEditingController textController;
 final Function(String dateTime) onChangeValue;
 
   BuildTextField({this.texto, this.simbolo, this.textController, this.onChangeValue});
@@ -24,16 +23,11 @@ final Function(String dateTime) onChangeValue;
                 borderSide:  BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(25.7),
               ),
-              suffixIcon: CircleIconButton(
-                onPressed: (){
-                  this.textController.clear();
-                },
-              ),
               prefixStyle: TextStyle(color: Colors.amber),
               prefixText: simbolo
           ),
           style: TextStyle(color: Colors.amber, fontSize: 25.0),
-          controller: this.textController,
+          controller: textController,
           onChanged: (value) { onChangeValue(value); },
         ),
     );

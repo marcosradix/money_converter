@@ -66,6 +66,12 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         FocusScope.of(context).requestFocus(new FocusNode());
                       },
+                      onDoubleTap: (){
+                        print("double tap");
+                        realController.clear();
+                        dolarController.clear();
+                        euroController.clear();
+                      },
                       child: Icon(
                         Icons.monetization_on,
                         size: 150.0,

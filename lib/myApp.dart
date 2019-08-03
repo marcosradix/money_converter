@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xffb32CD32),
+        backgroundColor: Color(0xffbe5e24),
         appBar: AppBar(
           title: Text(" \$ Conversor de moeda \$"),
           backgroundColor: Colors.amber,
