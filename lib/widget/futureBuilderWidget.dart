@@ -16,6 +16,10 @@ class _HomeState extends State<Home> {
   final dolarController = TextEditingController();
   final euroController = TextEditingController();
 
+  final focusDolar = FocusNode();
+  final focusEuro = FocusNode();
+  final focusReal = FocusNode();
+
   double dolar;
   double euro;
 
@@ -66,7 +70,7 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         FocusScope.of(context).requestFocus(new FocusNode());
                       },
-                      onDoubleTap: (){
+                      onDoubleTap: () {
                         print("double tap");
                         realController.clear();
                         dolarController.clear();
@@ -83,19 +87,24 @@ class _HomeState extends State<Home> {
                       simbolo: "R\$",
                       textController: this.realController,
                       onChangeValue: (_realChange),
+                      onFocus: focusReal,
                     ),
                     Divider(),
                     BuildTextField(
-                        texto: "DÓLAR",
-                        simbolo: "US\$",
-                        textController: this.dolarController,
-                        onChangeValue: (_dlarChange)),
+                      texto: "DÓLAR",
+                      simbolo: "US\$",
+                      textController: this.dolarController,
+                      onChangeValue: (_dlarChange),
+                      onFocus: focusDolar,
+                    ),
                     Divider(),
                     BuildTextField(
-                        texto: "EURO",
-                        simbolo: "€",
-                        textController: this.euroController,
-                        onChangeValue: (_euroChange)),
+                      texto: "EURO",
+                      simbolo: "€",
+                      textController: this.euroController,
+                      onChangeValue: (_euroChange),
+                      onFocus: focusEuro,
+                    ),
                   ],
                 ));
           default:

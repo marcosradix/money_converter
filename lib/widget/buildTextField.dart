@@ -7,8 +7,9 @@ final String texto;
 final String simbolo;
 final TextEditingController textController;
 final Function(String dateTime) onChangeValue;
+final FocusNode onFocus;
 
-  BuildTextField({this.texto, this.simbolo, this.textController, this.onChangeValue});
+  BuildTextField({this.texto, this.simbolo, this.textController, this.onChangeValue, this.onFocus});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ final Function(String dateTime) onChangeValue;
           style: TextStyle(color: Colors.amber, fontSize: 25.0),
           controller: textController,
           onChanged: (value) { onChangeValue(value); },
+          focusNode: onFocus,
         ),
     );
   }

@@ -21,8 +21,27 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
         ),
         body: Home(currencyService: currencyService),
+        floatingActionButton: Visibility(
+          visible: true,
+          child: showFloatingActionButtonHideKeyBoard(),
+        ),
       ),
       theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.amber),
+    );
+  }
+
+  Widget showFloatingActionButtonHideKeyBoard() {
+    return FloatingActionButton(
+      onPressed: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Icon(
+        Icons.close,
+        size: 20.0,
+        color: Colors.brown,
+      ),
+      backgroundColor: Colors.amber,
+      tooltip: "Fechar teclado",
     );
   }
 }
