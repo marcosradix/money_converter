@@ -4,14 +4,14 @@ import 'package:money_converter/services/currencyService.dart';
 import 'buildTextField.dart';
 
 class Home extends StatefulWidget {
-  final CurrencyService currencyService;
-  Home({Key key, @required this.currencyService}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  CurrencyService currencyService = new CurrencyService();
+
   final realController = TextEditingController();
   final dolarController = TextEditingController();
   final euroController = TextEditingController();
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map>(
-      future: widget.currencyService.getCurrencies(),
+      future: currencyService.getCurrencies(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:

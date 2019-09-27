@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:money_converter/services/currencyService.dart';
 import 'widget/futureBuilderWidget.dart';
 
 class MyApp extends StatefulWidget {
@@ -8,7 +7,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  CurrencyService currencyService = new CurrencyService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.amber,
           centerTitle: true,
         ),
-        body: Home(currencyService: currencyService),
+        body: Home(),
         floatingActionButton: Visibility(
           visible: true,
           child: showFloatingActionButtonHideKeyBoard(),
