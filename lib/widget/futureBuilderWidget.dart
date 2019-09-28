@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:money_converter/notifier/focusNotifier.dart';
 import 'package:money_converter/services/currencyService.dart';
+import 'package:provider/provider.dart';
 
 import 'buildTextField.dart';
 
 class Home extends StatefulWidget {
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   CurrencyService currencyService = new CurrencyService();
+  FocusNotifier focusNotifier;
 
   final realController = TextEditingController();
   final dolarController = TextEditingController();
@@ -41,9 +43,36 @@ class _HomeState extends State<Home> {
     realController.text = (euro * this.euro).toStringAsFixed(2);
     dolarController.text = (euro * this.euro / this.dolar).toStringAsFixed(2);
   }
+ void _handleFocusChangeDolar() {
+   focusNotifier.setOnFocus(_hasNoFocus());
+  }
+  void _handleFocusChangeReal() {
+
+   focusNotifier.setOnFocus(_hasNoFocus());
+  }
+  void _handleFocusChangeEuro() {
+   focusNotifier.setOnFocus(_hasNoFocus());
+  }
+
+ _hasNoFocus(){
+ if(focusDolar.hasFocus == true || focusReal.hasFocus == true || focusEuro.hasFocus == true){
+   return true;
+   }else{
+     return false;
+   }
+}
+@override
+  void initState() {
+    super.initState();
+    focusDolar.addListener(_handleFocusChangeDolar);
+    focusReal.addListener(_handleFocusChangeReal);
+    focusEuro.addListener(_handleFocusChangeEuro);  
+  }
 
   @override
   Widget build(BuildContext context) {
+    focusNotifier = Provider.of<FocusNotifier>(context, listen: false);
+
     return FutureBuilder<Map>(
       future: currencyService.getCurrencies(),
       builder: (context, snapshot) {

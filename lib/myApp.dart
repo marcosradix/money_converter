@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'notifier/focusNotifier.dart';
 import 'widget/futureBuilderWidget.dart';
+import 'package:provider/provider.dart';
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xffbe5e24),
@@ -21,15 +25,20 @@ class _MyAppState extends State<MyApp> {
         body: Home(),
         floatingActionButton: Visibility(
           visible: true,
-          child: showFloatingActionButtonHideKeyBoard(),
+          child: Selector<FocusNotifier, bool>(
+            selector: (context, focus) => focus.onFocus,
+            builder: (context, focus, child){
+            return showFloatingActionButtonHideKeyBoard(focus);
+          }
+          ),
         ),
       ),
       theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.amber),
     );
   }
 
-  Widget showFloatingActionButtonHideKeyBoard() {
-    return FloatingActionButton(
+  Widget showFloatingActionButtonHideKeyBoard(bool myFocus) {
+    return myFocus == true  ? FloatingActionButton(
       onPressed: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
@@ -40,6 +49,7 @@ class _MyAppState extends State<MyApp> {
       ),
       backgroundColor: Colors.amber,
       tooltip: "Fechar teclado",
-    );
-  }
+    ):Container();
+}
+    
 }
